@@ -1,9 +1,12 @@
 const img = document.querySelector("img");
 const button = document.querySelector("button");
+const inputText = document.querySelector("#gifput");
 
-function newImage() {
+let sendText = "";
+
+function newImage(gif) {
   fetch(
-    "  https://api.giphy.com/v1/gifs/translate?api_key=3n1VXMFtLfMuWdnG0X18fngmTgHIoh6n&s=cats",
+    `  https://api.giphy.com/v1/gifs/translate?api_key=3n1VXMFtLfMuWdnG0X18fngmTgHIoh6n&s=${gif}`,
     { mode: "cors" }
   )
     .then(function (response) {
@@ -14,8 +17,12 @@ function newImage() {
     });
 }
 
-window.onload = newImage();
+window.onload = newImage("cats");
+
+inputText.addEventListener("change", function onSelect(e) {
+  sendText = inputText.value;
+});
 
 button.addEventListener("click", (e) => {
-  newImage();
+  newImage(sendText);
 });
