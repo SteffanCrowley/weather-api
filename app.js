@@ -7,7 +7,7 @@ let city = "";
 
 async function getWeather(cityInput) {
   const response = await fetch(
-    `  http://api.openweathermap.org/data/2.5/weather?q=${cityInput}&APPID=a4a0dc6c4302e95bac6ab763510e5bfb`,
+    `  http://api.openweathermap.org/data/2.5/weather?q=${cityInput}&APPID=a4a0dc6c4302e95bac6ab763510e5bfb&units=imperial`,
     { mode: "cors" }
   );
   const weatherData = await response.json();
@@ -16,7 +16,7 @@ async function getWeather(cityInput) {
   const newWeather = new weatherObject(
     weatherData.name,
     weatherData.main.temp,
-    weatherData.main.temp
+    weatherData.main.feels_like
   );
   console.log(newWeather);
 }
@@ -32,9 +32,9 @@ button.addEventListener("click", (e) => {
 });
 
 class weatherObject {
-  constructor(cityName, tempF, tempC) {
+  constructor(cityName, tempF, tempFeels) {
     this.name = cityName;
     this.tempF = tempF;
-    this.tempC = tempC;
+    this.tempFeels = tempFeels;
   }
 }
