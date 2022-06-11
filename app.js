@@ -1,24 +1,26 @@
 const img = document.querySelector("img");
 const button = document.querySelector("button");
-const inputText = document.querySelector("#gifput");
+const inputText = document.querySelector("#city");
+const cityOutput = document.querySelector("#cityTitle");
 
-let sendText = "";
+let city = "";
 
-async function getCats(gif) {
+async function getWeather(cityInput) {
   const response = await fetch(
-    `  https://api.giphy.com/v1/gifs/translate?api_key=3n1VXMFtLfMuWdnG0X18fngmTgHIoh6n&s=${gif}`,
+    `  http://api.openweathermap.org/data/2.5/weather?q=${cityInput}&APPID=a4a0dc6c4302e95bac6ab763510e5bfb`,
     { mode: "cors" }
   );
-  const catData = await response.json();
-  img.src = catData.data.images.original.url;
+  const weatherData = await response.json();
+  console.log(weatherData);
+  cityOutput.innerHTML = weatherData.name;
 }
 
-window.onload = getCats("cats");
+window.onload = getWeather("Chicago");
 
 inputText.addEventListener("change", function onSelect(e) {
-  sendText = inputText.value;
+  city = inputText.value;
 });
 
 button.addEventListener("click", (e) => {
-  getCats(sendText);
+  getWeather(city);
 });
