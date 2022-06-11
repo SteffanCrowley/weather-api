@@ -1,3 +1,7 @@
+body {
+  font: 1em sans-serif;
+}
+
 input[type="email"] {
   -webkit-appearance: none;
   appearance: none;
@@ -37,4 +41,10 @@ input:focus:invalid {
 
 .error.active {
   padding: 0.3em;
+}
+
+h1,
+h3 {
+  padding: 0px;
+  margin: 5px;
 }

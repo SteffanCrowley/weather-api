@@ -4,6 +4,8 @@ const inputText = document.querySelector("#city");
 const inputError = document.querySelector("span.error");
 
 const cityOutput = document.querySelector("#cityTitle");
+const tempOutput = document.querySelector("#temp");
+const feelOutput = document.querySelector("#feels");
 
 let city = "";
 
@@ -20,19 +22,19 @@ async function getWeather(cityInput) {
       showError("please enter a valid city name");
     }
     console.log(weatherData);
-    cityOutput.innerHTML = weatherData.name;
     const newWeatherObj = new weatherObject(
       weatherData.name,
       weatherData.main.temp,
       weatherData.main.feels_like
     );
+    printWeather(newWeatherObj);
     console.log(newWeatherObj);
   } catch (error) {
     console.log("error");
   }
 }
 
-window.onload = getWeather("Chicago");
+window.onload = getWeather("Irvine");
 
 inputText.addEventListener("change", function onSelect(e) {
   city = inputText.value;
@@ -54,4 +56,10 @@ function showError(errorMessage) {
   inputError.textContent = errorMessage;
 
   inputError.className = "error active";
+}
+
+function printWeather(newWeatherObj) {
+  cityOutput.textContent = "City: " + newWeatherObj.name;
+  tempOutput.textContent = "Temperature: " + newWeatherObj.tempF;
+  feelOutput.textContent = "Feels Like: " + newWeatherObj.tempFeels;
 }
