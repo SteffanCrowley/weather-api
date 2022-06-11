@@ -1,6 +1,8 @@
 const img = document.querySelector("img");
 const button = document.querySelector("button");
 const inputText = document.querySelector("#city");
+const inputError = document.querySelector("span.error");
+
 const cityOutput = document.querySelector("#cityTitle");
 
 let city = "";
@@ -13,9 +15,9 @@ async function getWeather(cityInput) {
     );
     const weatherData = await response.json();
     if (weatherData.cod == "400") {
-      console.log("Please enter a city name");
+      showError("Please enter a city name");
     } else if (weatherData.cod == "404") {
-      console.log("please enter a valid city name");
+      showError("please enter a valid city name");
     }
     console.log(weatherData);
     cityOutput.innerHTML = weatherData.name;
@@ -26,7 +28,7 @@ async function getWeather(cityInput) {
     );
     console.log(newWeatherObj);
   } catch (error) {
-    alert("error");
+    console.log("error");
   }
 }
 
@@ -46,4 +48,10 @@ class weatherObject {
     this.tempF = tempF;
     this.tempFeels = tempFeels;
   }
+}
+
+function showError(errorMessage) {
+  inputError.textContent = errorMessage;
+
+  inputError.className = "error active";
 }
