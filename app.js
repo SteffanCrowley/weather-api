@@ -13,6 +13,12 @@ async function getWeather(cityInput) {
   const weatherData = await response.json();
   console.log(weatherData);
   cityOutput.innerHTML = weatherData.name;
+  const newWeather = new weatherObject(
+    weatherData.name,
+    weatherData.main.temp,
+    weatherData.main.temp
+  );
+  console.log(newWeather);
 }
 
 window.onload = getWeather("Chicago");
@@ -24,3 +30,11 @@ inputText.addEventListener("change", function onSelect(e) {
 button.addEventListener("click", (e) => {
   getWeather(city);
 });
+
+class weatherObject {
+  constructor(cityName, tempF, tempC) {
+    this.name = cityName;
+    this.tempF = tempF;
+    this.tempC = tempC;
+  }
+}
